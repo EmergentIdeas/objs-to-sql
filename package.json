@@ -1,0 +1,17 @@
+{
+	"name": "objs-to-sql",
+	"version": "1.0.0",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "npx mocha"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"chai": "^5.1.2",
+		"mocha": "^11.1.0"
+	}
+}

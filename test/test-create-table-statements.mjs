@@ -1,16 +1,14 @@
 import mocha from "mocha"
 import {assert} from 'chai'
 
-import Types from "../lib/types.mjs"
 import makeString from "../test-utils/make-string.mjs"
 import createTypeDescriptions from "../lib/create-type-descriptions.mjs"
 import createTableStatement from "../lib/create-table-statement.mjs"
-import keyed from "../lib/keyed.mjs"
 
 
-describe("determine types tests", function() {
+describe("table create code", function() {
 	
-	it("object lists", function() {
+	it("create tables", function() {
 		
 		let descs = createTypeDescriptions([
 			{

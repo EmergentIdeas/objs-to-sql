@@ -41,6 +41,13 @@ describe("determine type tests", function() {
 
 		// Likewise, this is a float, but should it be?
 		assert.equal(determineType('6.3e2'), Types.FLOAT)
+		
+		
+		
+
+		// If it's too big it will overflow the sql int, to call it text
+		assert.equal(determineType('1234567890'), Types.TEXT)
+		assert.equal(determineType(1234567890), Types.TEXT)
 	})
 	
 	it("floats", function() {
@@ -52,6 +59,8 @@ describe("determine type tests", function() {
 		assert.equal(determineType('8.3'), Types.FLOAT)
 		assert.equal(determineType('-98.3'), Types.FLOAT)
 		assert.equal(determineType('-8.3e-1'), Types.FLOAT)
+		assert.equal(determineType(1234567890.3), Types.TEXT)
+		assert.equal(determineType('8e+50'), Types.TEXT)
 	})
 	
 	it("dates", function() {

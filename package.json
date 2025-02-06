@@ -1,6 +1,6 @@
 {
 	"name": "objs-to-sql",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "index.mjs",
 	"type": "module",
 	"scripts": {
@@ -18,5 +18,6 @@
 		"index.mjs"
 		, "lib/"
 		, "package.json"
+		, "README.md"
 	]
 }

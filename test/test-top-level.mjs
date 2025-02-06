@@ -33,15 +33,22 @@ describe("test top level code", function () {
 
 		]
 
-		let code = generateSQL('test2', data)
-
-		console.log(code)
-
-		let target = 'CREATE TABLE `test2` (`id` INT, `name` TEXT, `birthdate` DATETIME, `bio` TEXT, `married` BOOL, `height` FLOAT);\n' +
+		let code = generateSQL('test2', data, {useIndividualInserts: false})
+		let target = 'drop table if exists `test2`;\nCREATE TABLE `test2` (`id` INT, `name` TEXT, `birthdate` DATETIME, `bio` TEXT, `married` BOOL, `height` FLOAT);\n' +
 			'INSERT INTO `test2` (`id`, `name`, `birthdate`, `bio`, `married`, `height`) VALUES (1, \'abc\', FROM_UNIXTIME(1738706896), \'hello \'\' ` \\" % $ \\t\\\\ ?  _  abc\', true, 6.1)' + 
 		', (2, \'abc\', FROM_UNIXTIME(1738706896), \'hello \'\' ` \\" % $ \\t\\\\ ?  _  abc\', true, 6.1);\n'
 
 		assert.equal(code, target)
 
+		code = generateSQL('test2', data)
+
+		console.log(code)
+
+		target = 'set autocommit=0;\nstart transaction;\ndrop table if exists `test2`;\nCREATE TABLE `test2` (`id` INT, `name` TEXT, `birthdate` DATETIME, `bio` TEXT, `married` BOOL, `height` FLOAT);\n' +
+'INSERT INTO `test2` (`id`, `name`, `birthdate`, `bio`, `married`, `height`) VALUES (1, \'abc\', FROM_UNIXTIME(1738706896), \'hello \'\' ` \\" % $ \\t\\\\ ?  _  abc\', true, 6.1);\n' + 
+'INSERT INTO `test2` (`id`, `name`, `birthdate`, `bio`, `married`, `height`) VALUES (2, \'abc\', FROM_UNIXTIME(1738706896), \'hello \'\' ` \\" % $ \\t\\\\ ?  _  abc\', true, 6.1);\n' + 
+'\ncommit;\n'
+
+		assert.equal(code, target)
 	})
 })
